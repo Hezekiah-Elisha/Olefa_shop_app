@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class OlefaShopViewModel @Inject constructor(private val fakeStoreRepository: ProductRepository) : ViewModel(){
+class HomeViewModel @Inject constructor(private val fakeStoreRepository: ProductRepository) : ViewModel(){
     var uiState: FakeStoreUiState by mutableStateOf(FakeStoreUiState.Loading)
         private set
 

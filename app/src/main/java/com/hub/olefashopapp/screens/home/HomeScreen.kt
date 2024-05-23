@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,6 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.hub.olefashopapp.R
@@ -56,7 +58,7 @@ import com.hub.olefashopapp.utils.Constants
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: OlefaShopViewModel
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     when (val state = viewModel.uiState) {
         is FakeStoreUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxWidth())
@@ -175,7 +177,8 @@ fun SearchSection(modifier: Modifier = Modifier) {
 @Composable
 fun ProductCard(product: ProductItem, modifier: Modifier = Modifier) {
     Card(
-        modifier = modifier.padding(8.dp),
+        modifier = modifier.padding(8.dp)
+            .fillMaxSize(),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
     ) {
         AsyncImage(
@@ -202,9 +205,10 @@ fun ProductCard(product: ProductItem, modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "Kes. ${product.price.toString()}",
+                text = "Kes. ${product.price * 100}",
                 fontFamily = manrope,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
+                fontSize = MaterialTheme.typography.bodySmall.fontSize
             )
         }
     }
